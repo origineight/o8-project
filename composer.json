@@ -1,0 +1,78 @@
+{
+    "name": "origineight/o8-project",
+    "type": "project",
+    "description": "A Drupal 9 composer-based installer for the O8 distribution.",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "origineight/o8_profile": "dev-master",
+        "cweagans/composer-patches": "^1.6.0",
+        "drupal/core-composer-scaffold": "*",
+        "oomphinc/composer-installers-extender": "^1.1"
+    },
+    "require-dev": {
+        "drush/drush": "^9.7.1 | ^10.2",
+        "zaporylie/composer-drupal-optimizations": "^1.1"
+    },
+    "config": {
+        "process-timeout": 0
+    },
+    "extra": {
+        "composer-exit-on-patch-failure": true,
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "web/"
+            }
+        },
+        "enable-patching": true,
+        "installer-paths": {
+            "web/core": [
+                "type:drupal-core"
+            ],
+            "web/libraries/{$name}": [
+                "type:drupal-library",
+                "type:bower-asset",
+                "type:npm-asset"
+            ],
+            "web/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "web/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "web/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/contrib/{$name}": [
+                "type:drupal-drush"
+            ]
+        },
+        "installer-types": [
+            "bower-asset",
+            "npm-asset"
+        ],
+        "patchLevel": {
+            "drupal/core": "-p2"
+        }
+    },
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        "assets": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        },
+        "origineight": {
+            "type": "vcs",
+            "url":  "https://github.com/origineight/o8_profile.git"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "quick-start": [
+            "composer install --optimize-autoloader --no-dev",
+        ]
+    }
+}
