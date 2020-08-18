@@ -72,7 +72,7 @@
     "prefer-stable": true,
     "scripts": {
         "quick-start": [
-            "composer install --optimize-autoloader --no-dev",
+            "composer install --optimize-autoloader --no-dev"
         ]
     }
 }
