@@ -65,7 +65,7 @@
         },
         "origineight": {
             "type": "vcs",
-            "url":  "https://github.com/origineight/o8_profile.git"
+            "url":  "https://github.com/origineight/o8_profile"
         }
     },
     "minimum-stability": "dev",
