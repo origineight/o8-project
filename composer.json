@@ -62,10 +62,6 @@
         "assets": {
             "type": "composer",
             "url": "https://asset-packagist.org"
-        },
-        "origineight": {
-            "type": "vcs",
-            "url":  "https://github.com/origineight/o8_profile"
         }
     },
     "minimum-stability": "dev",
