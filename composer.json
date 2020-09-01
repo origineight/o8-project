@@ -3,18 +3,43 @@
     "type": "project",
     "description": "A Drupal 9 composer-based installer for the O8 distribution.",
     "license": "GPL-2.0-or-later",
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        "assets": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    },
     "require": {
-        "origineight/o8_profile": "dev-master",
+        "composer/installers": "^1.0.20",
         "cweagans/composer-patches": "^1.6.0",
-        "drupal/core-composer-scaffold": "*",
-        "oomphinc/composer-installers-extender": "^2.0.0"
+        "drupal/core-composer-scaffold": "^9",
+        "drupal/core-project-message": "^9",
+        "drupal/core-recommended": "^9",
+        "oomphinc/composer-installers-extender": "^2.0.0",
+        "origineight/o8_profile": "dev-master",
+        "pantheon-systems/drupal-integrations": "^8",
+        "pantheon-systems/quicksilver-pushback": "^2",
+        "zaporylie/composer-drupal-optimizations": "^1.1"
     },
     "require-dev": {
         "drush/drush": "^9.7.1 | ^10.2",
         "zaporylie/composer-drupal-optimizations": "^1.1"
     },
     "config": {
-        "process-timeout": 0
+        "process-timeout": 0,
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "platform": {
+            "php": "7.3"
+        }
+    },
+    "conflict": {
+        "drupal/drupal": "*"
     },
     "extra": {
         "composer-exit-on-patch-failure": true,
@@ -24,6 +49,10 @@
             }
         },
         "enable-patching": true,
+        "installer-types": [
+            "bower-asset",
+            "npm-asset"
+        ],
         "installer-paths": {
             "web/core": [
                 "type:drupal-core"
@@ -46,29 +75,53 @@
                 "type:drupal-drush"
             ]
         },
-        "installer-types": [
-            "bower-asset",
-            "npm-asset"
-        ],
         "patchLevel": {
             "drupal/core": "-p2"
-        }
-    },
-    "repositories": {
-        "drupal": {
-            "type": "composer",
-            "url": "https://packages.drupal.org/8"
         },
-        "assets": {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
+        "build-env": {
+            "install-cms": [
+                "drush site-install standard --account-mail={account-mail} --account-name={account-name} --account-pass={account-pass} --site-mail={site-mail} --site-name={site-name} --yes"
+            ],
+            "export-configuration": "drush config-export --yes"
+        },
+        "drupal-scaffold": {
+            "allowed-packages": [
+                "pantheon-systems/drupal-integrations"
+            ],
+            "locations": {
+                "web-root": "./web"
+            },
+            "file-mapping": {
+                "[project-root]/.editorconfig": false
+            }
         }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "autoload": {
+        "classmap": [
+            "scripts/composer/ScriptHandler.php"
+        ]
+    },
+
     "scripts": {
         "quick-start": [
             "composer install --optimize-autoloader --no-dev"
+        ],
+        "build-assets": [
+            "@prepare-for-pantheon",
+            "composer install --optimize-autoloader --no-dev"
+        ],
+        "prepare-for-pantheon": "DrupalProject\\composer\\ScriptHandler::prepareForPantheon",
+        "post-install-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+        ],
+        "post-update-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+        ],
+        "post-create-project-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
         ]
+
     }
 }
