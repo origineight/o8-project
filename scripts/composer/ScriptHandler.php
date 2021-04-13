@@ -41,9 +41,9 @@ class ScriptHandler
     // Create the files directory with chmod 0777
     if (!$fs->exists($root . '/sites/default/files')) {
       $oldmask = umask(0);
-      $fs->mkdir($root . '/sites/default/files', 0777);
+      $fs->mkdir($root . '/sites/default/files', 2775);
       umask($oldmask);
-      $event->getIO()->write("Create a sites/default/files directory with chmod 0777");
+      $event->getIO()->write("Create a sites/default/files directory with chmod 2775");
     }
   }
 
