@@ -87,7 +87,12 @@
                 "web-root": "web/"
             },
             "file-mapping": {
-                "[project-root]/.editorconfig": false
+                "[project-root]/.editorconfig": false,
+                "[project-root]/pantheon.yml": {
+                    "mode": "replace",
+                    "path": "assets/pantheon.yml",
+                    "overwrite": false
+                }
             }
         }
     },
