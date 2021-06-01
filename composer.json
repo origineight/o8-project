@@ -1,7 +1,7 @@
 {
     "name": "origineight/o8-project",
     "type": "project",
-    "description": "A Drupal 9 composer-based installer for the O8 distribution.",
+    "description": "A Drupal 8 composer-based installer for the O8 distribution.",
     "license": "GPL-2.0-or-later",
     "repositories": {
         "drupal": {
@@ -16,9 +16,9 @@
     "require": {
         "composer/installers": "^1.0.20",
         "cweagans/composer-patches": "^1.6.0",
-        "drupal/core-composer-scaffold": "^9",
-        "drupal/core-project-message": "^9",
-        "drupal/core-recommended": "^9",
+        "drupal/core-composer-scaffold": "^8.9",
+        "drupal/core-project-message": "^8.9",
+        "drupal/core-recommended": "^8.9",
         "oomphinc/composer-installers-extender": "^2.0.0",
         "origineight/o8_profile": "^1.0.0",
         "pantheon-systems/drupal-integrations": "^8",
