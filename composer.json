@@ -35,7 +35,7 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "platform": {
-            "php": "7.3"
+            "php": "8.0"
         }
     },
     "conflict": {
@@ -92,6 +92,19 @@
                     "mode": "replace",
                     "path": "assets/pantheon.yml",
                     "overwrite": false
+                },
+                "[web-root]/sites/default/services.yml": {
+                    "mode": "replace",
+                    "path": "[web-root]/sites/default/default.services.yml",
+                    "overwrite": false
+                },
+                "[web-root]/sites/default/services.pantheon.preproduction.yml": {
+                    "mode": "replace",
+                    "path": "assets/default.services.pantheon.preproduction.yml",
+                    "overwrite": false
+                },
+                "[web-root]/sites/default/settings.php": {
+                    "append": "assets/settings-append.txt"
                 }
             }
         }
